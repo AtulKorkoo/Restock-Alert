@@ -188,6 +188,11 @@ export default function DashboardPage() {
                   tracking ? 'border-green-500' : 'border-slate-700'
                 }`}
               >
+                {product.photo_url && (
+                  <div className="mb-4 bg-slate-900/50 rounded-lg p-4 flex items-center justify-center" style={{ height: '180px' }}>
+                    <img src={product.photo_url} alt={product.name} className="max-h-full max-w-full object-contain" />
+                  </div>
+                )}
                 <h3 className="text-lg font-bold mb-2">{product.name}</h3>
                 <p className="text-sm text-slate-400 mb-4">{product.description}</p>
                 <div className="flex justify-between items-center mb-4 text-sm">

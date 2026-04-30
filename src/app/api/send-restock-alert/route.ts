@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     // (onboarding@resend.dev) since we haven't verified our own domain yet.
     // We'll switch this to alerts@restockalerts.io once we own a domain.
     const { data, error } = await resend.emails.send({
-      from: 'Restock Alerts <onboarding@resend.dev>',
+      from: 'Restock Alerts <alerts@restockalerts.co.uk>',
       to: recipient_email,
       subject: `🔥 ${product_name} — ${stateLabel}`,
       html: `

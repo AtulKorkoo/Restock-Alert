@@ -41,15 +41,50 @@ export async function POST(request: NextRequest) {
 body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
 table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
 img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+
 .dark-yellow { color:#FFD93D !important; }
-[data-ogsc] .dark-yellow, [data-ogsb] .dark-yellow { color:#FFD93D !important; }
-u + .body .dark-yellow { color:#FFD93D !important; }
+[data-ogsc] .dark-yellow,
+[data-ogsb] .dark-yellow { color:#FFD93D !important; }
+u + .body .dark-yellow,
 u + #body .dark-yellow { color:#FFD93D !important; }
-.cta-bg { background-color:#FFD93D !important; }
-[data-ogsc] .cta-bg, [data-ogsb] .cta-bg { background-color:#FFD93D !important; }
+
+.cta-bg,
+td.cta-bg,
+table.cta-bg {
+  background:#FFD93D !important;
+  background-color:#FFD93D !important;
+  mix-blend-mode:normal !important;
+  filter:none !important;
+}
+[data-ogsc] .cta-bg,
+[data-ogsb] .cta-bg,
+[data-ogsc] td.cta-bg,
+[data-ogsb] td.cta-bg {
+  background:#FFD93D !important;
+  background-color:#FFD93D !important;
+}
+u + .body .cta-bg,
+u + #body .cta-bg { background-color:#FFD93D !important; }
+
+.logo-mark,
+td.logo-mark {
+  background:#FFD93D !important;
+  background-color:#FFD93D !important;
+  mix-blend-mode:normal !important;
+  filter:none !important;
+}
+[data-ogsc] .logo-mark,
+[data-ogsb] .logo-mark,
+[data-ogsc] td.logo-mark,
+[data-ogsb] td.logo-mark {
+  background:#FFD93D !important;
+  background-color:#FFD93D !important;
+}
+
 @media (prefers-color-scheme: dark) {
   .dark-yellow { color:#FFD93D !important; }
-  .cta-bg { background-color:#FFD93D !important; }
+  .cta-bg, td.cta-bg { background-color:#FFD93D !important; }
+  .logo-mark, td.logo-mark { background-color:#FFD93D !important; }
 }
 </style>
 </head>
@@ -69,8 +104,8 @@ ${product_name} ${stateVerb}. Caught it before the bots.
 <td style="padding:0 8px 24px 8px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0">
 <tr>
-<td bgcolor="#FFD93D" class="cta-bg" style="background-color:#FFD93D; width:24px; height:24px; text-align:center; vertical-align:middle;">
-<div style="width:8px; height:8px; background-color:#1A1623; margin:0 auto;">&nbsp;</div>
+<td bgcolor="#FFD93D" class="logo-mark" style="background:#FFD93D !important; background-color:#FFD93D !important; width:24px; height:24px; text-align:center; vertical-align:middle; mso-line-height-rule:exactly; line-height:24px;">
+<span style="display:inline-block; width:8px; height:8px; background:#1A1623 !important; background-color:#1A1623 !important; line-height:8px; font-size:0;">&nbsp;</span>
 </td>
 <td style="padding-left:10px; color:#F0E6D2; font-size:14px; font-weight:500; letter-spacing:-0.01em;">
 restock alerts
@@ -84,8 +119,8 @@ restock alerts
 <td style="padding:0 8px 16px 8px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(240,230,210,0.2);">
 <tr>
-<td style="background-color:rgba(255,217,61,0.10); padding:6px 12px; border-right:1px solid rgba(240,230,210,0.2); color:#FFD93D; font-size:11px; font-weight:500; letter-spacing:0.18em;" class="dark-yellow">
-<font color="#FFD93D">●</font> <font color="#FFD93D">${stateLabel}</font>
+<td style="background-color:rgba(255,217,61,0.10); padding:6px 12px; border-right:1px solid rgba(240,230,210,0.2); font-size:11px; font-weight:500; letter-spacing:0.18em;" class="dark-yellow">
+<font color="#FFD93D">●</font>&nbsp;<font color="#FFD93D">${stateLabel}</font>
 </td>
 <td style="padding:6px 12px; color:#B8B0A0; font-size:11px; font-weight:500; letter-spacing:0.18em;">
 JUST NOW
@@ -98,7 +133,7 @@ JUST NOW
 <tr>
 <td style="padding:8px 8px 24px 8px;">
 <h1 style="margin:0; color:#F0E6D2; font-size:38px; line-height:1.05; letter-spacing:-0.03em; font-weight:800; text-transform:uppercase; font-family: Impact, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-CATCH IT. <font color="#FFD93D" class="dark-yellow">⚡</font>
+CATCH IT.&nbsp;<font color="#FFD93D" class="dark-yellow">⚡</font>
 </h1>
 </td>
 </tr>
@@ -128,10 +163,10 @@ STATUS
 </tr>
 </table>
 
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;" class="cta-bg">
 <tr>
-<td bgcolor="#FFD93D" class="cta-bg" style="background-color:#FFD93D; padding:0;">
-<a href="${product_url}" style="display:inline-block; background-color:#FFD93D; color:#1A1623; padding:14px 28px; text-decoration:none; font-weight:700; font-size:15px; letter-spacing:0.02em; border:2px solid #1A1623; mso-padding-alt:0;">
+<td bgcolor="#FFD93D" class="cta-bg" style="background:#FFD93D !important; background-color:#FFD93D !important; mso-padding-alt:0;">
+<a href="${product_url}" style="display:block; background:#FFD93D !important; background-color:#FFD93D !important; color:#1A1623 !important; padding:14px 28px; text-decoration:none; font-weight:700; font-size:15px; letter-spacing:0.02em; border:2px solid #1A1623; mso-padding-alt:0;">
 <font color="#1A1623"><strong>VIEW DROP &nbsp;→</strong></font>
 </a>
 </td>

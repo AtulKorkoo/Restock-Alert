@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="96" viewBox="0 0 600 96">
+  <rect x="2" y="2" width="596" height="92" fill="#FFD93D" stroke="#1A1623" stroke-width="4"/>
+  <text x="40" y="60" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#1A1623" letter-spacing="0.5">VIEW DROP</text>
+  <text x="540" y="60" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#1A1623" text-anchor="middle">→</text>
+</svg>

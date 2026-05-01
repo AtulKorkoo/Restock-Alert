@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 :root { color-scheme: dark; supported-color-schemes: dark; }
 body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
 table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
-img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; display:block; }
 
 .dark-yellow { color:#FFD93D !important; }
 [data-ogsc] .dark-yellow,
@@ -48,43 +48,8 @@ img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:no
 u + .body .dark-yellow,
 u + #body .dark-yellow { color:#FFD93D !important; }
 
-.cta-bg,
-td.cta-bg,
-table.cta-bg {
-  background:#FFD93D !important;
-  background-color:#FFD93D !important;
-  mix-blend-mode:normal !important;
-  filter:none !important;
-}
-[data-ogsc] .cta-bg,
-[data-ogsb] .cta-bg,
-[data-ogsc] td.cta-bg,
-[data-ogsb] td.cta-bg {
-  background:#FFD93D !important;
-  background-color:#FFD93D !important;
-}
-u + .body .cta-bg,
-u + #body .cta-bg { background-color:#FFD93D !important; }
-
-.logo-mark,
-td.logo-mark {
-  background:#FFD93D !important;
-  background-color:#FFD93D !important;
-  mix-blend-mode:normal !important;
-  filter:none !important;
-}
-[data-ogsc] .logo-mark,
-[data-ogsb] .logo-mark,
-[data-ogsc] td.logo-mark,
-[data-ogsb] td.logo-mark {
-  background:#FFD93D !important;
-  background-color:#FFD93D !important;
-}
-
 @media (prefers-color-scheme: dark) {
   .dark-yellow { color:#FFD93D !important; }
-  .cta-bg, td.cta-bg { background-color:#FFD93D !important; }
-  .logo-mark, td.logo-mark { background-color:#FFD93D !important; }
 }
 </style>
 </head>
@@ -104,10 +69,10 @@ ${product_name} ${stateVerb}. Caught it before the bots.
 <td style="padding:0 8px 24px 8px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0">
 <tr>
-<td bgcolor="#FFD93D" class="logo-mark" style="background:#FFD93D !important; background-color:#FFD93D !important; width:24px; height:24px; text-align:center; vertical-align:middle; mso-line-height-rule:exactly; line-height:24px;">
-<span style="display:inline-block; width:8px; height:8px; background:#1A1623 !important; background-color:#1A1623 !important; line-height:8px; font-size:0;">&nbsp;</span>
+<td style="vertical-align:middle;">
+<img src="https://restockalerts.co.uk/email-assets-logo.png" width="24" height="24" alt="Restock Alerts" style="display:block; width:24px; height:24px;" />
 </td>
-<td style="padding-left:10px; color:#F0E6D2; font-size:14px; font-weight:500; letter-spacing:-0.01em;">
+<td style="padding-left:10px; color:#F0E6D2; font-size:14px; font-weight:500; letter-spacing:-0.01em; vertical-align:middle;">
 restock alerts
 </td>
 </tr>
@@ -163,11 +128,11 @@ STATUS
 </tr>
 </table>
 
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;" class="cta-bg">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
 <tr>
-<td bgcolor="#FFD93D" class="cta-bg" style="background:#FFD93D !important; background-color:#FFD93D !important; mso-padding-alt:0;">
-<a href="${product_url}" style="display:block; background:#FFD93D !important; background-color:#FFD93D !important; color:#1A1623 !important; padding:14px 28px; text-decoration:none; font-weight:700; font-size:15px; letter-spacing:0.02em; border:2px solid #1A1623; mso-padding-alt:0;">
-<font color="#1A1623"><strong>VIEW DROP &nbsp;→</strong></font>
+<td>
+<a href="${product_url}" target="_blank" style="text-decoration:none; display:inline-block;">
+<img src="https://restockalerts.co.uk/email-assets-cta.png" width="300" height="48" alt="VIEW DROP →" style="display:block; width:300px; height:48px; border:0;" />
 </a>
 </td>
 </tr>

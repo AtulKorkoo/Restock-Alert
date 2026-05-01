@@ -17,6 +17,20 @@ export default function Home() {
 
   return (
     <main className="bg-ink text-cream min-h-screen flex flex-col">
+      <style jsx global>{`
+        @keyframes ra-pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.4); opacity: 0.4; }
+        }
+        @keyframes ra-pulse-ring {
+          0% { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(2.4); opacity: 0; }
+        }
+        .ra-dot-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 10px; height: 10px; }
+        .ra-dot-core { width: 8px; height: 8px; background: #FFD93D; animation: ra-pulse 1.6s ease-in-out infinite; }
+        .ra-dot-ring { position: absolute; inset: 0; border-radius: 50%; background: #FFD93D; animation: ra-pulse-ring 1.6s ease-out infinite; }
+      `}</style>
+
       <nav className="flex items-center justify-between px-5 md:px-10 py-4 border-b border-cream/10 max-w-[1400px] mx-auto w-full">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
@@ -25,9 +39,17 @@ export default function Home() {
             </div>
             <span className="text-sm font-medium">restock alerts</span>
           </div>
-          <div className="hidden md:inline-flex items-center gap-2 px-2.5 py-1 border border-yellow/30 text-[10px] font-medium tracking-[0.18em] text-yellow ml-3">
-            <span className="w-1.5 h-1.5 bg-yellow"></span>
-            LIVE · 11 UK RETAILERS
+          <div className="hidden md:inline-flex items-stretch border border-cream/20 ml-3">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-yellow/[0.08] border-r border-cream/20 text-[10px] font-medium tracking-[0.18em] text-yellow">
+              <span className="ra-dot-wrap" style={{ width: '8px', height: '8px' }}>
+                <span className="ra-dot-ring"></span>
+                <span className="ra-dot-core" style={{ width: '6px', height: '6px' }}></span>
+              </span>
+              LIVE
+            </div>
+            <div className="inline-flex items-center px-2.5 py-1 text-[10px] font-medium tracking-[0.18em] text-cream2">
+              11 UK RETAILERS
+            </div>
           </div>
         </div>
 
@@ -50,9 +72,17 @@ export default function Home() {
         <div className="md:grid md:grid-cols-[1.15fr_0.85fr] md:gap-16 md:items-center flex-1">
 
           <div>
-            <div className="md:hidden inline-flex items-center gap-2 px-3 py-1 border border-yellow/30 text-xs font-medium tracking-[0.18em] text-yellow mb-6">
-              <span className="w-1.5 h-1.5 bg-yellow"></span>
-              LIVE · 11 UK RETAILERS
+            <div className="md:hidden inline-flex items-stretch border border-cream/20 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow/[0.08] border-r border-cream/20 text-xs font-medium tracking-[0.18em] text-yellow">
+                <span className="ra-dot-wrap">
+                  <span className="ra-dot-ring"></span>
+                  <span className="ra-dot-core"></span>
+                </span>
+                LIVE
+              </div>
+              <div className="inline-flex items-center px-3 py-1 text-xs font-medium tracking-[0.18em] text-cream2">
+                11 UK RETAILERS
+              </div>
             </div>
 
             <h1

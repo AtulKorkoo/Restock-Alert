@@ -33,9 +33,27 @@ export async function POST(request: NextRequest) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<meta name="supported-color-schemes" content="dark" />
 <title>Catch it</title>
+<style type="text/css">
+:root { color-scheme: dark; supported-color-schemes: dark; }
+body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
+img { -ms-interpolation-mode:bicubic; border:0; outline:none; text-decoration:none; }
+.dark-yellow { color:#FFD93D !important; }
+[data-ogsc] .dark-yellow, [data-ogsb] .dark-yellow { color:#FFD93D !important; }
+u + .body .dark-yellow { color:#FFD93D !important; }
+u + #body .dark-yellow { color:#FFD93D !important; }
+.cta-bg { background-color:#FFD93D !important; }
+[data-ogsc] .cta-bg, [data-ogsb] .cta-bg { background-color:#FFD93D !important; }
+@media (prefers-color-scheme: dark) {
+  .dark-yellow { color:#FFD93D !important; }
+  .cta-bg { background-color:#FFD93D !important; }
+}
+</style>
 </head>
-<body style="margin:0; padding:0; background-color:#1A1623; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">
+<body class="body" id="body" style="margin:0; padding:0; background-color:#1A1623; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">
 
 <div style="display:none; max-height:0; overflow:hidden; color:#1A1623; opacity:0;">
 ${product_name} ${stateVerb}. Caught it before the bots.
@@ -51,8 +69,8 @@ ${product_name} ${stateVerb}. Caught it before the bots.
 <td style="padding:0 8px 24px 8px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0">
 <tr>
-<td style="background-color:#FFD93D; width:24px; height:24px; text-align:center; vertical-align:middle;">
-<div style="width:8px; height:8px; background-color:#1A1623; margin:0 auto;"></div>
+<td bgcolor="#FFD93D" class="cta-bg" style="background-color:#FFD93D; width:24px; height:24px; text-align:center; vertical-align:middle;">
+<div style="width:8px; height:8px; background-color:#1A1623; margin:0 auto;">&nbsp;</div>
 </td>
 <td style="padding-left:10px; color:#F0E6D2; font-size:14px; font-weight:500; letter-spacing:-0.01em;">
 restock alerts
@@ -66,8 +84,8 @@ restock alerts
 <td style="padding:0 8px 16px 8px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border:1px solid rgba(240,230,210,0.2);">
 <tr>
-<td style="background-color:rgba(255,217,61,0.08); padding:6px 12px; border-right:1px solid rgba(240,230,210,0.2); color:#FFD93D; font-size:11px; font-weight:500; letter-spacing:0.18em;">
-● ${stateLabel}
+<td style="background-color:rgba(255,217,61,0.10); padding:6px 12px; border-right:1px solid rgba(240,230,210,0.2); color:#FFD93D; font-size:11px; font-weight:500; letter-spacing:0.18em;" class="dark-yellow">
+<font color="#FFD93D">●</font> <font color="#FFD93D">${stateLabel}</font>
 </td>
 <td style="padding:6px 12px; color:#B8B0A0; font-size:11px; font-weight:500; letter-spacing:0.18em;">
 JUST NOW
@@ -79,8 +97,8 @@ JUST NOW
 
 <tr>
 <td style="padding:8px 8px 24px 8px;">
-<h1 style="margin:0; color:#F0E6D2; font-size:42px; line-height:1; letter-spacing:-0.04em; font-weight:800; text-transform:uppercase; font-family: Impact, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-CATCH<br/>IT.<span style="color:#FFD93D;">⚡</span>
+<h1 style="margin:0; color:#F0E6D2; font-size:38px; line-height:1.05; letter-spacing:-0.03em; font-weight:800; text-transform:uppercase; font-family: Impact, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+CATCH IT. <font color="#FFD93D" class="dark-yellow">⚡</font>
 </h1>
 </td>
 </tr>
@@ -91,13 +109,9 @@ CATCH<br/>IT.<span style="color:#FFD93D;">⚡</span>
 <tr>
 <td style="padding:24px;">
 
-<table role="presentation" cellpadding="0" cellspacing="0" border="0">
-<tr>
-<td style="color:#8B8478; font-size:10px; letter-spacing:0.18em; padding-bottom:12px;">
+<div style="color:#8B8478; font-size:10px; letter-spacing:0.18em; padding-bottom:12px;">
 — PRODUCT
-</td>
-</tr>
-</table>
+</div>
 
 <div style="color:#F0E6D2; font-size:22px; font-weight:600; line-height:1.2; padding-bottom:20px; letter-spacing:-0.01em;">
 ${product_name}
@@ -108,17 +122,21 @@ ${product_name}
 <td style="padding:14px 0; color:#8B8478; font-size:11px; letter-spacing:0.14em;">
 STATUS
 </td>
-<td align="right" style="padding:14px 0; color:#FFD93D; font-size:11px; font-weight:500; letter-spacing:0.14em;">
-${stateLabel}
+<td align="right" style="padding:14px 0; font-size:11px; font-weight:500; letter-spacing:0.14em;" class="dark-yellow">
+<font color="#FFD93D">${stateLabel}</font>
 </td>
 </tr>
 </table>
 
-<div style="padding-top:20px;">
-<a href="${product_url}" style="display:inline-block; background-color:#FFD93D; color:#1A1623; padding:14px 28px; text-decoration:none; font-weight:600; font-size:15px; letter-spacing:0.02em; border:2px solid #1A1623;">
-VIEW DROP &nbsp;→
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+<tr>
+<td bgcolor="#FFD93D" class="cta-bg" style="background-color:#FFD93D; padding:0;">
+<a href="${product_url}" style="display:inline-block; background-color:#FFD93D; color:#1A1623; padding:14px 28px; text-decoration:none; font-weight:700; font-size:15px; letter-spacing:0.02em; border:2px solid #1A1623; mso-padding-alt:0;">
+<font color="#1A1623"><strong>VIEW DROP &nbsp;→</strong></font>
 </a>
-</div>
+</td>
+</tr>
+</table>
 
 <div style="padding-top:14px; color:#8B8478; font-size:11px; letter-spacing:0.06em;">
 Move fast. These don't sit.
@@ -137,7 +155,7 @@ Move fast. These don't sit.
 <td style="padding:24px 0; text-align:center;">
 <div style="color:#8B8478; font-size:11px; letter-spacing:0.06em; line-height:1.6;">
 You're getting this because you're tracking <strong style="color:#B8B0A0;">${product_name}</strong>.<br/>
-Caught by the watcher · Sent from <a href="https://restockalerts.co.uk" style="color:#FFD93D; text-decoration:none;">restockalerts.co.uk</a>
+Caught by the watcher · Sent from <a href="https://restockalerts.co.uk" style="color:#FFD93D; text-decoration:none;" class="dark-yellow"><font color="#FFD93D">restockalerts.co.uk</font></a>
 </div>
 </td>
 </tr>

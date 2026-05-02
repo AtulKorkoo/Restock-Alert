@@ -48,7 +48,7 @@ export default function Home() {
               LIVE
             </div>
             <div className="inline-flex items-center px-2.5 py-1 text-[10px] font-medium tracking-[0.18em] text-cream2">
-              11 UK RETAILERS
+              7 UK RETAILERS
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function Home() {
                 LIVE
               </div>
               <div className="inline-flex items-center px-3 py-1 text-xs font-medium tracking-[0.18em] text-cream2">
-                11 UK RETAILERS
+                7 UK RETAILERS
               </div>
             </div>
 

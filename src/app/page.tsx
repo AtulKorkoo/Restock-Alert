@@ -3,17 +3,38 @@
 import { useAuth } from '@/lib/auth-context'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { createClient } from '@/lib/supabase'
+
+type Retailer = {
+  name: string
+  slug: string
+  display_order: number
+}
 
 export default function Home() {
   const { user, loading } = useAuth()
   const router = useRouter()
+  const supabase = createClient()
+  const [retailers, setRetailers] = useState<Retailer[]>([])
 
   useEffect(() => {
     if (!loading && user) {
       router.push('/dashboard')
     }
   }, [user, loading, router])
+
+  useEffect(() => {
+    const fetchRetailers = async () => {
+      const { data } = await supabase
+        .from('retailers')
+        .select('name, slug, display_order')
+        .eq('active', true)
+        .order('display_order', { ascending: true })
+      setRetailers(data || [])
+    }
+    fetchRetailers()
+  }, [])
 
   return (
     <main className="bg-ink text-cream min-h-screen flex flex-col">
@@ -48,7 +69,7 @@ export default function Home() {
               LIVE
             </div>
             <div className="inline-flex items-center px-2.5 py-1 text-[10px] font-medium tracking-[0.18em] text-cream2">
-              7 UK RETAILERS
+              {retailers.length > 0 && `${retailers.length} UK RETAILERS`}
             </div>
           </div>
         </div>
@@ -81,7 +102,7 @@ export default function Home() {
                 LIVE
               </div>
               <div className="inline-flex items-center px-3 py-1 text-xs font-medium tracking-[0.18em] text-cream2">
-                7 UK RETAILERS
+                {retailers.length > 0 && `${retailers.length} UK RETAILERS`}
               </div>
             </div>
 
@@ -135,22 +156,17 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="px-5 md:px-10 py-3.5 border-t border-cream/10 flex items-center gap-3.5 text-xs tracking-[0.14em] text-mute overflow-hidden whitespace-nowrap">
-        <span className="text-yellow">●</span>
-        <span>CHAOS CARDS</span>
-        <span className="w-1 h-1 bg-yellow flex-shrink-0"></span>
-        <span>SMYTHS</span>
-        <span className="w-1 h-1 bg-yellow flex-shrink-0"></span>
-        <span>ARGOS</span>
-        <span className="w-1 h-1 bg-yellow flex-shrink-0"></span>
-        <span>MAGIC MADHOUSE</span>
-        <span className="w-1 h-1 bg-yellow flex-shrink-0"></span>
-        <span>AMAZON UK</span>
-        <span className="w-1 h-1 bg-yellow flex-shrink-0"></span>
-        <span className="hidden md:inline">POKÉMON CENTER</span>
-        <span className="hidden md:inline w-1 h-1 bg-yellow flex-shrink-0"></span>
-        <span>+6 MORE</span>
-      </section>
+      {retailers.length > 0 && (
+        <section className="px-5 md:px-10 py-3.5 border-t border-cream/10 flex items-center gap-3.5 text-xs tracking-[0.14em] text-mute overflow-hidden whitespace-nowrap">
+          <span className="text-yellow">●</span>
+          {retailers.map((retailer, i) => (
+            <Fragment key={retailer.slug}>
+              {i > 0 && <span className="w-1 h-1 bg-yellow flex-shrink-0"></span>}
+              <span className="uppercase">{retailer.name}</span>
+            </Fragment>
+          ))}
+        </section>
+      )}
     </main>
   )
 }

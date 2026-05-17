@@ -19,11 +19,19 @@ type UserAlert = {
   product_id: string
 }
 
+type Retailer = {
+  name: string
+  slug: string
+  display_order: number
+}
+
 export default function DashboardPage() {
   const [catalog, setCatalog] = useState<Product[]>([])
   const [userAlerts, setUserAlerts] = useState<UserAlert[]>([])
+  const [activeRetailers, setActiveRetailers] = useState<Retailer[]>([])
   const [loading, setLoading] = useState(true)
   const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({})
   const router = useRouter()
   const { user, loading: authLoading, signOut } = useAuth()
   const supabase = createClient()
@@ -54,8 +62,15 @@ export default function DashboardPage() {
         .select('id, product_id')
         .eq('user_id', user?.id)
 
+      const { data: retailersData } = await supabase
+        .from('retailers')
+        .select('name, slug, display_order')
+        .eq('active', true)
+        .order('display_order', { ascending: true })
+
       setCatalog(catalogData || [])
       setUserAlerts(alertsData || [])
+      setActiveRetailers(retailersData || [])
     } catch (err) {
       console.error('Failed to load:', err)
     } finally {
@@ -66,23 +81,16 @@ export default function DashboardPage() {
   const isTracking = (productId: string) =>
     userAlerts.some((a) => a.product_id === productId)
 
-  const handleToggleAlert = async (productId: string) => {
-    if (isTracking(productId)) {
-      const alert = userAlerts.find((a) => a.product_id === productId)
-      if (alert) {
-        await supabase.from('user_alerts').delete().eq('id', alert.id)
-      }
-    } else {
-      if (userAlerts.length >= FREE_TIER_LIMIT) {
-        setShowUpgradeModal(true)
-        return
-      }
-      await supabase.from('user_alerts').insert({
-        user_id: user?.id,
-        product_id: productId,
-        retailers: ['Chaos Cards', 'Magic Madhouse'],
-      })
+  const handleTrack = async (productId: string) => {
+    if (userAlerts.length >= FREE_TIER_LIMIT) {
+      setShowUpgradeModal(true)
+      return
     }
+    await supabase.from('user_alerts').insert({
+      user_id: user?.id,
+      product_id: productId,
+      retailers: activeRetailers.map(r => r.slug),
+    })
     await loadData()
   }
 
@@ -188,11 +196,25 @@ export default function DashboardPage() {
                   tracking ? 'border-green-500' : 'border-slate-700'
                 }`}
               >
-                {product.photo_url && (
-                  <div className="mb-4 bg-slate-900/50 rounded-lg p-4 flex items-center justify-center" style={{ height: '180px' }}>
-                    <img src={product.photo_url} alt={product.name} className="max-h-full max-w-full object-contain" />
-                  </div>
-                )}
+                <div className="mb-4 bg-slate-900/50 rounded-lg overflow-hidden relative" style={{ height: '180px' }}>
+                  {product.photo_url ? (
+                    <div className="h-full flex items-center justify-center p-4 relative">
+                      {!imageLoaded[product.id] && (
+                        <div className="absolute inset-0 bg-slate-700/40 animate-pulse" />
+                      )}
+                      <img
+                        src={product.photo_url}
+                        alt={product.name}
+                        className={`max-h-full max-w-full object-contain transition-opacity duration-300 ${imageLoaded[product.id] ? 'opacity-100' : 'opacity-0'}`}
+                        onLoad={() => setImageLoaded(prev => ({ ...prev, [product.id]: true }))}
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-full flex items-center justify-center">
+                      <span className="text-7xl font-bold text-slate-700">{product.name.charAt(0)}</span>
+                    </div>
+                  )}
+                </div>
                 <h3 className="text-lg font-bold mb-2">{product.name}</h3>
                 <p className="text-sm text-slate-400 mb-4">{product.description}</p>
                 <div className="flex justify-between items-center mb-4 text-sm">
@@ -211,14 +233,15 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 <button
-                  onClick={() => handleToggleAlert(product.id)}
-                  className={`w-full px-4 py-2 rounded font-medium transition ${
+                  onClick={() => handleTrack(product.id)}
+                  disabled={tracking}
+                  className={`w-full px-4 py-2 rounded font-medium transition disabled:opacity-100 ${
                     tracking
-                      ? 'bg-green-600 hover:bg-green-700'
+                      ? 'bg-green-900/60 text-green-400 cursor-default'
                       : 'bg-blue-600 hover:bg-blue-700'
                   }`}
                 >
-                  {tracking ? '✓ Tracking' : '+ Track this product'}
+                  {tracking ? 'Watching ✓' : '+ Track Forever'}
                 </button>
               </div>
             )

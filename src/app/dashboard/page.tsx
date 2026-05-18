@@ -101,7 +101,7 @@ export default function DashboardPage() {
   if (!user) return null
 
   const potentialSavings = catalog
-    .filter((p) => isTracking(p.id))
+    .filter((p) => isTracking(p.id) && p.secondary_price > p.retail_price)
     .reduce((sum, p) => sum + (p.secondary_price - p.retail_price), 0)
 
   return (
@@ -225,11 +225,15 @@ export default function DashboardPage() {
                   <div className="text-slate-600">→</div>
                   <div>
                     <div className="text-slate-500">Secondary</div>
-                    <div className="text-xl font-bold text-green-400">£{product.secondary_price}</div>
+                    <div className="text-xl font-bold text-green-400">
+                      {product.secondary_price ? `£${product.secondary_price}` : '—'}
+                    </div>
                   </div>
                   <div>
                     <div className="text-slate-500">Save</div>
-                    <div className="text-xl font-bold text-green-400">£{savings}</div>
+                    <div className="text-xl font-bold text-green-400">
+                      {product.secondary_price && savings > 0 ? `£${savings}` : '—'}
+                    </div>
                   </div>
                 </div>
                 <button
